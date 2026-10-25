@@ -1,0 +1,11 @@
+{
+  "name": "stack-dotnet",
+  "version": "0.1.0",
+  "description": ".NET playbook: solution basics, coding conventions, library packages and API architectures (modular monolith, hexagonal), with a scaffold skill.",
+  "author": {
+    "name": "Leonardo Gian Pottmayer"
+  },
+  "repository": "https://github.com/leonardopottmayer/devkit",
+  "license": "MIT",
+  "dependencies": ["workflow"]
+}

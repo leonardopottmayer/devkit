@@ -11,6 +11,11 @@
       "name": "workflow",
       "source": "./plugins/workflow",
       "description": "Git branching, commits, pull requests, security baseline, automated releases and package publishing."
+    },
+    {
+      "name": "stack-dotnet",
+      "source": "./plugins/stack-dotnet",
+      "description": ".NET playbook: solution basics, coding conventions, library packages and API architectures, with a scaffold skill."
     }
   ]
 }

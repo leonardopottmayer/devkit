@@ -1,0 +1,32 @@
+<Project>
+
+  <!-- Every project in the repository. -->
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+
+    <!-- The one version of the repository. From stage 3 on, the release bot writes it: never edit it by hand. -->
+    <Version>0.1.0</Version>
+  </PropertyGroup>
+
+  <!-- Libraries only: package metadata. Delete this group and the ItemGroup below for an API. -->
+  <PropertyGroup>
+    <Authors>AUTHOR</Authors>
+    <Copyright>Copyright (c) YEAR AUTHOR</Copyright>
+    <RepositoryUrl>https://github.com/OWNER/REPOSITORY</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageProjectUrl>https://github.com/OWNER/REPOSITORY</PackageProjectUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageTags>TAGS</PackageTags>
+  </PropertyGroup>
+
+  <!-- The root README becomes the package page on the registry. -->
+  <PropertyGroup Condition="Exists('$(MSBuildThisFileDirectory)README.md')">
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
+  <ItemGroup Condition="Exists('$(MSBuildThisFileDirectory)README.md')">
+    <None Include="$(MSBuildThisFileDirectory)README.md" Pack="true" PackagePath="\" Visible="false" />
+  </ItemGroup>
+
+</Project>
