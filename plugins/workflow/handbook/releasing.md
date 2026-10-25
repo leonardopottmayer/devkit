@@ -56,13 +56,15 @@ The release job doesn't run with the default `GITHUB_TOKEN`, for two reasons:
 
 A personal access token would work, but it's tied to your account, expires, and usually has more access than needed. A **GitHub App** is a dedicated identity with short-lived tokens:
 
-1. Create a GitHub App in your account (*Settings → Developer settings → GitHub Apps*). Permissions: **Contents: read and write**, **Pull requests: read and write**, **Issues: read and write** (semantic-release comments on released pull requests). No webhook.
+1. Create a GitHub App in your account (*Settings → Developer settings → GitHub Apps*). Permissions: **Contents: read and write** and **Pull requests: read and write**, nothing else. No webhook.
 2. Install it on the repository.
-3. Save its App ID and a private key as repository secrets (`RELEASE_APP_ID`, `RELEASE_APP_PRIVATE_KEY`). The release workflow turns them into a short-lived token with `actions/create-github-app-token`.
+3. Save its Client ID as a repository variable (`RELEASE_APP_CLIENT_ID`) and a private key as a repository secret (`RELEASE_APP_PRIVATE_KEY`). The release workflow turns them into a short-lived token with `actions/create-github-app-token`.
 4. In the `main` ruleset, add the App to the **bypass list**. It's the only identity allowed to push to `main` directly.
 5. Enable **Allow auto-merge** in the repository settings.
 
-One App can serve all your repositories: install it on each one.
+One App can serve all your repositories: install it on each one. The **release** skill walks through every step.
+
+semantic-release is configured not to comment on pull requests or open issues, which is why the App needs no other permission.
 
 ## Rules that keep it working
 
