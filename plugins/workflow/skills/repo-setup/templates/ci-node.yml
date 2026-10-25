@@ -1,0 +1,49 @@
+name: CI (Node)
+
+on:
+  push:
+    branches: [main, dev]
+  pull_request:
+    branches: [main, dev]
+
+# CI only reads the repository.
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-node-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    # This name is the required check in the main and dev rulesets. Rename both together.
+    name: Build & Test (Node)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      # Reads the pnpm version from "packageManager" in package.json.
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v6
+
+      # Reads the Node version from .nvmrc and caches the pnpm store.
+      - name: Setup Node
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      - name: Lint
+        run: pnpm run --if-present lint
+
+      - name: Build
+        run: pnpm run --if-present build
+
+      - name: Test
+        run: pnpm run --if-present test

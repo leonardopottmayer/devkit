@@ -61,19 +61,10 @@ Use the **setup** skill for the tools this stack needs. Come back here when it's
 
 ### 4. Create the project and the repository (stage 1)
 
-There's no dedicated skill for this step yet; follow these steps with the user:
+1. Create the project with the scaffolder, in a folder named after the project (lowercase, hyphens). Run it once to show the user it works.
+2. Use the **repo-setup** skill in Create mode: it adds the standard files, the CI, makes the first commit, creates the GitHub repository and protects `main`.
 
-1. Create the project with the scaffolder, in a folder named after the project (lowercase, hyphens).
-2. Make sure `.gitignore` covers the stack's build outputs and `.env` files, and create a `.env.example` if the project reads any configuration ([`security.md`](../../handbook/security.md)).
-3. Write a short `README.md`: what the project is, how to run it.
-4. First commit: `git init -b main`, `git add .`, `git commit -m "chore: initial commit"`. Before committing, show the user the list of files (`git status`) and check that nothing secret is in it.
-5. Ask whether the repository should be public or private, then create it and push: `gh repo create <name> --public|--private --source . --push`.
-6. Turn on the security settings from [`security.md`](../../handbook/security.md#repository-settings): secret scanning with push protection, Dependabot alerts and security updates.
-7. Repository settings: allow squash merge and merge commits, disable rebase merge, turn on "automatically delete head branches" and "allow auto-merge".
-8. Protect `main` with a ruleset as described in [`branching.md`](../../handbook/branching.md#protection-rules): pull request required, no force push, no deletion, zero approvals. Add the required CI check once a CI workflow exists.
-9. Add a CI workflow (`.github/workflows/ci.yml`) that installs dependencies, builds and runs the tests on every pull request and push to `main`, with `permissions: contents: read`.
-
-Each of these is a moment to explain one concept: what a commit is, what the remote is, why `main` is protected, what CI does.
+Each step of repo-setup is a moment to explain one concept: what a commit is, what the remote is, why `main` is protected, what CI does.
 
 The project is now in **stage 1**. Continue with [Daily work](#daily-work).
 
@@ -88,7 +79,7 @@ Use the table "How to tell which stage a project is in" in [`../../handbook/READ
 - a release workflow running semantic-release exists → stage 3
 - the release workflow publishes packages → stage 4
 
-If the project doesn't meet stage 1, the next step is to bring it there: steps 2 and 6 to 9 of [New project](#4-create-the-project-and-the-repository-stage-1).
+If the project doesn't meet stage 1, the next step is to bring it there with the **repo-setup** skill in Audit mode.
 
 ### 2. Find where the work is
 
@@ -123,4 +114,4 @@ Suggest the next stage when the need appears, not before:
 | stage 3 (automated releases) | the user wants version numbers, a changelog, or will publish packages |
 | stage 4 (publishing) | the project is a library others will install |
 
-Each move is described in the handbook page of that stage ([`branching.md`](../../handbook/branching.md), [`releasing.md`](../../handbook/releasing.md), [`publishing.md`](../../handbook/publishing.md)). Explain what changes in the user's routine before making the move.
+Each move is described in the handbook page of that stage ([`branching.md`](../../handbook/branching.md), [`releasing.md`](../../handbook/releasing.md), [`publishing.md`](../../handbook/publishing.md)). Explain what changes in the user's routine before making the move. The move to stage 2 is done by the **repo-setup** skill (Add dev mode).
