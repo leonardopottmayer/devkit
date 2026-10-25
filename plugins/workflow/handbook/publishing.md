@@ -66,20 +66,22 @@ If your packages share a prefix (`Pottmayer.*`), request an ID prefix reservatio
 
 ## Testing before publishing
 
-To try an unreleased version in another project, don't publish a pre-release: use a local feed.
+To try an unreleased version in another project, don't publish a pre-release: use a **local feed**, a folder on your machine (`~/local-feed`) that the consuming project installs from. The **local-package-testing** skill does it step by step. The essentials:
 
-**.NET**: pack into a folder and add that folder as a package source in the consuming project's `nuget.config`:
-
-```bash
-dotnet pack -c Release -o ~/local-nuget -p:Version=0.0.0-local.1
-dotnet nuget add source ~/local-nuget --name local
-```
-
-**npm**: pack a tarball and install it:
+**.NET**: pack with a new, higher pre-release version every time, and set `PackageVersion`, not `Version`:
 
 ```bash
-npm pack                              # creates my-package-1.2.3.tgz
-npm install ../my-package/my-package-1.2.3.tgz
+dotnet pack -c Release -o ~/local-feed -p:PackageVersion=0.0.19-local.$(date +%Y%m%d%H%M%S)
+dotnet nuget add source ~/local-feed --name local
 ```
 
-Remove the local source (or the tarball dependency) before committing the consuming project.
+NuGet caches each version on the machine: re-pack the same version and the consumer keeps running the old code.
+
+**npm**: pack a tarball with `pnpm pack` (it ships exactly what would be published) and install it:
+
+```bash
+pnpm pack --pack-destination ~/local-feed
+pnpm add ~/local-feed/my-package-1.2.3.tgz
+```
+
+The local source, the local version and the tarball dependency never get committed in the consuming project.
