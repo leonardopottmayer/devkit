@@ -94,10 +94,14 @@ The bot is a GitHub App. One App serves every repository of the account; skip to
    ```bash
    gh variable set RELEASE_APP_CLIENT_ID --body "<client id>"
    ```
-3. The user stores the private key, in their own terminal:
+3. The user stores the private key, in their own terminal, from the repository folder. Give the command for their shell; PowerShell has no `<` redirection:
    ```bash
    gh secret set RELEASE_APP_PRIVATE_KEY < path/to/the-key.pem
    ```
+   ```powershell
+   Get-Content "path\to\the-key.pem" -Raw | gh secret set RELEASE_APP_PRIVATE_KEY
+   ```
+   Then check it's there (only the name shows, never the value): `gh secret list`.
 4. Let the bot bypass the `main` ruleset. Find its id, then write the updated ruleset to a temporary file outside the repository and send it back, replacing `<APP_ID>` with the App ID. Run these in bash (Git Bash on Windows): Windows PowerShell 5.1 strips the double quotes inside `--jq` expressions passed to `gh`, and the query breaks.
    ```bash
    gh api repos/{owner}/{repo}/rulesets --jq '.[] | select(.name == "main") | .id'
