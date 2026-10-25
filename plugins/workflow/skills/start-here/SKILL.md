@@ -114,4 +114,4 @@ Suggest the next stage when the need appears, not before:
 | stage 3 (automated releases) | the user wants version numbers, a changelog, or will publish packages |
 | stage 4 (publishing) | the project is a library others will install |
 
-Each move is described in the handbook page of that stage ([`branching.md`](../../handbook/branching.md), [`releasing.md`](../../handbook/releasing.md), [`publishing.md`](../../handbook/publishing.md)). Explain what changes in the user's routine before making the move. The move to stage 2 is done by the **repo-setup** skill (Add dev mode).
+Each move is described in the handbook page of that stage ([`branching.md`](../../handbook/branching.md), [`releasing.md`](../../handbook/releasing.md), [`publishing.md`](../../handbook/publishing.md)). Explain what changes in the user's routine before making the move. The move to stage 2 is done by the **repo-setup** skill (Add dev mode); stages 3 and 4 by the **release** skill.
