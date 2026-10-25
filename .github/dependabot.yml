@@ -1,0 +1,14 @@
+# The devkit has no package dependencies: only the GitHub Actions of its own workflows.
+# Security updates ignore target-branch: they always open against main and are handled like hotfixes.
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    target-branch: dev
+    schedule:
+      interval: weekly
+    commit-message:
+      prefix: ci
+    groups:
+      actions:
+        patterns: ["*"]
