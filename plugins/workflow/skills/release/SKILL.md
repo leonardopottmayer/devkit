@@ -98,7 +98,7 @@ The bot is a GitHub App. One App serves every repository of the account; skip to
    ```bash
    gh secret set RELEASE_APP_PRIVATE_KEY < path/to/the-key.pem
    ```
-4. Let the bot bypass the `main` ruleset. Find its id, then write the updated ruleset to a temporary file outside the repository and send it back, replacing `<APP_ID>` with the App ID:
+4. Let the bot bypass the `main` ruleset. Find its id, then write the updated ruleset to a temporary file outside the repository and send it back, replacing `<APP_ID>` with the App ID. Run these in bash (Git Bash on Windows): Windows PowerShell 5.1 strips the double quotes inside `--jq` expressions passed to `gh`, and the query breaks.
    ```bash
    gh api repos/{owner}/{repo}/rulesets --jq '.[] | select(.name == "main") | .id'
    gh api repos/{owner}/{repo}/rulesets/<RULESET_ID> --jq '{name, target, enforcement, conditions, rules, bypass_actors: (.bypass_actors + [{actor_id: <APP_ID>, actor_type: "Integration", bypass_mode: "always"}])}' > <tmp>/main-ruleset.json
