@@ -16,7 +16,7 @@ How I build software: repository workflow, releases, package publishing and stac
 |---|---|---|
 | [`workflow`](plugins/workflow/handbook/README.md) | branching, commits, pull requests, security baseline, automated releases, package publishing | handbook written; skills `start-here`, `setup`, `repo-setup`, `release`, `local-package-testing` |
 | [`stack-dotnet`](plugins/stack-dotnet/handbook/README.md) | .NET basics, coding conventions, libraries, API architectures (modular monolith) | handbook written; skill `scaffold` |
-| `stack-node` | React + Vite and NestJS playbooks | planned |
+| [`stack-node`](plugins/stack-node/handbook/README.md) | Node / TypeScript basics, React + Vite frontends, UI libraries (antd + Tailwind) | handbook written; skill `scaffold` |
 
 Start reading at the [workflow handbook](plugins/workflow/handbook/README.md). With an agent, just say "start here" or "I want to build...": the `start-here` skill takes it from there.
 

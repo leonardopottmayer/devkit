@@ -1,0 +1,16 @@
+/* CSS layer order. The "antd" layer sits between "base" (Tailwind's reset) and "utilities":
+   the reset doesn't wipe antd's styles, and Tailwind utilities still win when applied.
+   antd writes into the "antd" layer through <StyleProvider layer> (src/app/providers.tsx). */
+@layer theme, base, antd, components, utilities;
+
+@import 'tailwindcss';
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+}

@@ -1,0 +1,11 @@
+{
+  "name": "stack-node",
+  "version": "0.1.0",
+  "description": "Node playbook: TypeScript and pnpm basics, React + Vite frontends and a catalog of UI libraries (antd + Tailwind), with a scaffold skill.",
+  "author": {
+    "name": "Leonardo Gian Pottmayer"
+  },
+  "repository": "https://github.com/leonardopottmayer/devkit",
+  "license": "MIT",
+  "dependencies": ["workflow"]
+}
