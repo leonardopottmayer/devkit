@@ -1,0 +1,16 @@
+{
+  "name": "devkit",
+  "owner": {
+    "name": "Leonardo Gian Pottmayer"
+  },
+  "metadata": {
+    "description": "How I build software: repository workflow, releases, publishing and stack playbooks, packaged as agent skills."
+  },
+  "plugins": [
+    {
+      "name": "workflow",
+      "source": "./plugins/workflow",
+      "description": "Git branching, commits, pull requests, security baseline, automated releases and package publishing."
+    }
+  ]
+}

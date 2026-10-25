@@ -1,0 +1,10 @@
+{
+  "name": "workflow",
+  "version": "0.1.0",
+  "description": "Git branching, commits, pull requests, security baseline, automated releases and package publishing.",
+  "author": {
+    "name": "Leonardo Gian Pottmayer"
+  },
+  "repository": "https://github.com/leonardopottmayer/devkit",
+  "license": "MIT"
+}
