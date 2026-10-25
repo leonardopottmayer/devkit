@@ -79,6 +79,8 @@ When released code has a bug that can't wait for the next release, and `dev` alr
 2. Fix it, open a pull request **to `main`**, squash-merge it.
 3. The release bot publishes a patch version, then opens its usual `main` → `dev` pull request, which carries the fix to `dev` too. Nothing else to do.
 
+Before stage 3 there's no bot: after merging a hotfix into `main`, open the `main` → `dev` pull request yourself and merge it with a merge commit. The same goes for any other pull request that enters `main` without coming from `dev`.
+
 If `dev` is ready to ship anyway, skip the hotfix: fix it on a normal branch and release `dev`.
 
 ## Maintaining an old version
