@@ -49,12 +49,13 @@ Repeat the idea back in one sentence and confirm before moving on.
 
 | Kind | Stack | Playbook |
 |---|---|---|
-| web frontend | React + Vite | `stack-node` (planned) |
-| API | NestJS, or .NET if the user prefers C# | `stack-node` (planned) / `stack-dotnet` |
-| library | .NET (NuGet) or TypeScript (npm), whichever the user's ecosystem is | `stack-dotnet` / `stack-node` (planned) |
-| CLI | .NET or Node | planned |
+| web frontend | React + Vite | `stack-node` |
+| API | .NET | `stack-dotnet` |
+| library | .NET (NuGet) | `stack-dotnet` |
+| library | TypeScript (npm) | not covered yet |
+| CLI | .NET or Node | not covered yet |
 
-**.NET** has its playbook: the `stack-dotnet` plugin's **scaffold** skill creates the project (step 4). For a stack whose playbook is still planned: create the project with the official scaffolder (`pnpm create vite`, `pnpm dlx @nestjs/cli new`), tell the user that stack-specific conventions are coming later, and apply the workflow from this handbook, which doesn't depend on the stack. If the `stack-dotnet` plugin isn't installed, suggest installing it (`/plugin install stack-dotnet@devkit`).
+A stack with a playbook is created by that plugin's **scaffold** skill (step 4): `stack-dotnet:scaffold` or `stack-node:scaffold`. If the plugin isn't installed, suggest installing it (`/plugin install stack-dotnet@devkit`, `/plugin install stack-node@devkit`). For a kind not covered yet: create the project with the stack's official scaffolder, tell the user that stack-specific conventions aren't documented for it, and apply the workflow from this handbook, which doesn't depend on the stack.
 
 ### 3. Prepare the machine
 
@@ -62,7 +63,7 @@ Use the **setup** skill for the tools this stack needs. Come back here when it's
 
 ### 4. Create the project and the repository (stage 1)
 
-1. Create the project in a folder named after the project (lowercase, hyphens): with the stack's skill when its playbook exists (**scaffold** for .NET), otherwise with the official scaffolder. Run it once to show the user it works.
+1. Create the project in a folder named after the project (lowercase, hyphens): with the stack plugin's **scaffold** skill when its playbook exists, otherwise with the official scaffolder. Run it once to show the user it works.
 2. Use the **repo-setup** skill in Create mode: it adds the standard files, the CI, makes the first commit, creates the GitHub repository and protects `main`.
 
 Each step of repo-setup is a moment to explain one concept: what a commit is, what the remote is, why `main` is protected, what CI does.
