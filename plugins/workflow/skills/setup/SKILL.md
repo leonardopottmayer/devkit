@@ -1,6 +1,6 @@
 ---
 name: setup
-description: Checks which development tools are installed on the user's machine and guides the installation of what's missing, per operating system - git, GitHub CLI, Node (via fnm), pnpm, .NET SDK, Python, and the tlc-spec-driven skill. Use when the user is preparing their computer to code, when a command fails with "not found" / "not recognized", when start-here reaches the setup step, or when the user asks "what do I need to install", "set up my machine", "install node", "install git".
+description: Checks which development tools are installed on the user's machine and guides the installation of what's missing, per operating system - git, GitHub CLI, Node (via fnm), pnpm, .NET SDK, Python, the tlc-spec-driven skill, and the token of the GitHub MCP server. Use when the user is preparing their computer to code, when a command fails with "not found" / "not recognized", when start-here reaches the setup step, or when the user asks "what do I need to install", "set up my machine", "install node", "install git".
 ---
 
 # Setup
@@ -113,6 +113,21 @@ npx @tech-leads-club/agent-skills install -s tlc-spec-driven -a claude-code
 ```
 
 Replace `claude-code` with the user's agent if it's a different one. Running `npx @tech-leads-club/agent-skills` without arguments opens an interactive wizard instead. The agent may need a restart to see the new skill.
+
+## Step 7: GitHub MCP server (optional, Claude Code)
+
+The `workflow` plugin includes GitHub's remote MCP server: it gives the agent tools to read repositories, pull requests and CI runs directly. Everything in the workflow also works without it, through `gh`, so this step is optional.
+
+The server needs a token. The user creates it and types it into Claude Code's own configuration dialog, never into the chat:
+
+1. At https://github.com/settings/personal-access-tokens/new, create a **fine-grained** token:
+   - name: `claude-github-mcp`; expiration: 90 days (renew it when it expires);
+   - repository access: all repositories, or only the ones they'll work on;
+   - permissions: **Contents: Read and write**, **Pull requests: Read and write**, **Actions: Read**. Nothing else.
+2. Claude Code asks for the token (*GitHub token for the GitHub MCP server*) when the plugin is enabled. To set or change it later, use the plugin's configuration in the `/plugin` menu. It's stored in the system's secure credential store.
+3. Check with `/mcp`: the `github` server should be connected. A ✘ with a 401 means the token is missing, expired or wrong.
+
+The server only loads the toolsets the workflow uses (`repos`, `pull_requests`, `actions`), to keep the agent's context small. A user who doesn't want it can turn it off in `/mcp` without removing the plugin.
 
 ## Done
 

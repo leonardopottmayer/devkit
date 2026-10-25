@@ -15,6 +15,7 @@ The workflow is documented in the handbook, at `../../handbook/` relative to thi
 - **Speak the user's language.** The handbook is in English; your explanations are in whatever language the user writes in.
 - **Explain terms the first time they appear**, using [`concepts.md`](../../handbook/concepts.md). "A branch is a separate line of work, so you can try things without touching the main version."
 - **Teach this workflow, not alternatives.** The handbook is opinionated on purpose. If the user asks why it's done this way, explain the reason given in the handbook; don't offer a menu of other ways.
+- **`gh` is the reference for GitHub operations.** The skills write their commands with `gh`. If the GitHub MCP server is connected, you may use its tools for the same things (reading a pull request, its checks, a CI run); the result must be the same.
 - **The user stays in control.** Ask before anything that leaves their machine or is hard to undo: creating the GitHub repository, pushing, merging, publishing. Never ask for or type passwords, tokens or other secrets (see [`security.md`](../../handbook/security.md)).
 
 ## First: new project or existing one?

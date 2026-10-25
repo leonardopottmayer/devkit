@@ -6,5 +6,13 @@
     "name": "Leonardo Gian Pottmayer"
   },
   "repository": "https://github.com/leonardopottmayer/devkit",
-  "license": "MIT"
+  "license": "MIT",
+  "userConfig": {
+    "github_token": {
+      "type": "string",
+      "title": "GitHub token for the GitHub MCP server",
+      "description": "A fine-grained personal access token with Contents and Pull requests (read and write) and Actions (read). Optional: leave it empty to skip the GitHub MCP server; the skills work without it through the gh CLI.",
+      "sensitive": true
+    }
+  }
 }

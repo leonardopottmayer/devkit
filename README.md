@@ -29,6 +29,8 @@ This repository is a Claude Code plugin marketplace:
 /plugin install workflow@devkit
 ```
 
+The `workflow` plugin also brings GitHub's remote MCP server. It asks for an optional GitHub token when enabled; the `setup` skill explains how to create one. Without a token, everything still works through the `gh` CLI.
+
 ## Using it without Claude Code
 
 - The handbook is plain Markdown. Read it on GitHub.
