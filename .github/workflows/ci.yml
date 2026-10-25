@@ -1,0 +1,57 @@
+name: CI
+
+on:
+  push:
+    branches: [main, dev]
+  pull_request:
+    branches: [main, dev]
+
+# CI only reads the repository.
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    # This name is the required check in the main and dev rulesets. Rename both together.
+    name: Validate
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Setup Node
+        uses: actions/setup-node@v7
+        with:
+          node-version: lts/*
+
+      # The marketplace and every plugin: manifests, skills, MCP servers. Warnings fail too.
+      - name: Validate the marketplace and the plugins
+        run: |
+          for path in . plugins/*/; do
+            npx --yes @anthropic-ai/claude-code@2 plugin validate "$path" --strict
+          done
+
+      # Every relative link in the Markdown files points to a file or folder that exists.
+      # ponytail: anchors (#section) aren't checked; add a link checker if broken anchors show up.
+      - name: Check relative links
+        run: |
+          broken=0
+          while IFS= read -r file; do
+            dir=$(dirname "$file")
+            while IFS= read -r link; do
+              target="${link%%#*}"
+              [ -z "$target" ] && continue
+              if [ ! -e "$dir/$target" ]; then
+                echo "::error file=$file::broken link: $link"
+                broken=1
+              fi
+            done < <(grep -oE '\]\([^)]+\)' "$file" | sed -E 's/^\]\(//; s/\)$//' | grep -vE '^(https?:|mailto:|#)')
+          done < <(find . -name '*.md' -not -path './.git/*')
+          exit $broken
