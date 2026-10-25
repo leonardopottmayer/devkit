@@ -14,7 +14,7 @@ How I build software: repository workflow, releases, package publishing and stac
 
 | Plugin | Covers | Status |
 |---|---|---|
-| [`workflow`](plugins/workflow/handbook/README.md) | branching, commits, pull requests, security baseline, automated releases, package publishing | handbook written; skills `start-here` and `setup` ready, more in progress |
+| [`workflow`](plugins/workflow/handbook/README.md) | branching, commits, pull requests, security baseline, automated releases, package publishing | handbook written; skills `start-here`, `setup`, `repo-setup`, `release`, `local-package-testing` |
 | `stack-dotnet` | .NET project playbook | planned |
 | `stack-node` | React + Vite and NestJS playbooks | planned |
 
