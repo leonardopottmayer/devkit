@@ -71,7 +71,7 @@ Applies to every project below it:
 - `<Version>`: the one version of the repository. From stage 3 of the workflow on, the release bot writes it ([releasing](../../workflow/handbook/releasing.md)).
 - Libraries also put the package metadata here (authors, license, repository URL, README). Each project sets only its own `<Description>`.
 
-> tars still repeats `TargetFramework`, `Nullable` and `ImplicitUsings` in each project file. New projects keep them in `Directory.Build.props`.
+> pandora still repeats `TargetFramework`, `Nullable` and `ImplicitUsings` in each project file. New projects keep them in `Directory.Build.props`.
 
 ## Central package management
 
@@ -87,7 +87,7 @@ Every package version lives in `Directory.Packages.props`. Project files referen
 
 One package, one version, one place to update. `dotnet add package` already writes the version to `Directory.Packages.props` when central management is on, and Dependabot understands it.
 
-> tars and pandora still declare versions in each project file; they'll be migrated.
+> pandora still declares versions in each project file; it'll be migrated.
 
 ## Tests
 
@@ -101,7 +101,7 @@ One package, one version, one place to update. `dotnet add package` already writ
 
 AwesomeAssertions is a free (Apache 2.0) continuation of FluentAssertions 7, with the same API. FluentAssertions 8 and later need a paid license for commercial use, so new projects don't use it.
 
-> tars uses xUnit 2 with FluentAssertions 8, and pandora xUnit 2 with plain `Assert`. New projects use the stack above.
+> pandora still uses xUnit 2 with plain `Assert`. New projects use the stack above.
 
 Tests assert behavior through public entry points. Name them after what they check: `Rejects_signing_keys_shorter_than_32_bytes`.
 
