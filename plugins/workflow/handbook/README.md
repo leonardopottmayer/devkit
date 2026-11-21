@@ -15,7 +15,7 @@ You don't need the whole process on day one. A project adopts it in stages. Each
 | **3. Automated releases** | merging into `main` creates the version number, the tag, the changelog and the GitHub Release on its own | [releasing](releasing.md) |
 | **4. Publishing** | the release also publishes packages (NuGet, npm) | [publishing](publishing.md) |
 
-A website or an app may never need stage 4, and that's fine. Stages 1 to 3 are worth it for any project you plan to keep.
+A website or an app may never need stage 4, and that's fine. Stages 1 to 3 are worth it for any project you plan to keep. An app that runs on a server ships Docker images instead: see [deploying](deploying.md).
 
 ### How to tell which stage a project is in
 
