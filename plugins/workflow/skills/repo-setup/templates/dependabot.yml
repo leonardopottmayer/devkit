@@ -1,6 +1,8 @@
 # Keep only the ecosystems the project uses. Remove every `target-branch: dev` line while the project has no dev branch (stage 1).
 # Security updates ignore target-branch: they always open against main. A library handles them like hotfixes;
 # an app with staging moves them to dev (handbook/deploying.md).
+# Each ecosystem's group takes only minor and patch updates; every major update arrives in its own
+# pull request (handbook/security.md).
 version: 2
 updates:
   - package-ecosystem: github-actions
@@ -13,6 +15,7 @@ updates:
     groups:
       actions:
         patterns: ["*"]
+        update-types: ["minor", "patch"]
 
   # NuGet doesn't tell dev dependencies apart, so every update is a fix(deps).
   - package-ecosystem: nuget
@@ -26,6 +29,7 @@ updates:
     groups:
       nuget:
         patterns: ["*"]
+        update-types: ["minor", "patch"]
 
   # npm also covers pnpm (it reads pnpm-lock.yaml).
   - package-ecosystem: npm
@@ -40,3 +44,4 @@ updates:
     groups:
       npm:
         patterns: ["*"]
+        update-types: ["minor", "patch"]
