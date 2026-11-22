@@ -36,7 +36,7 @@ Every dependency is code you didn't write running with your app's permissions.
 - Prefer fewer dependencies. Before adding one, check whether the standard library or the framework already does it.
 - Prefer well-known, maintained packages. Look at the last release date and download count.
 - Dependabot opens version-update pull requests weekly, grouped, targeting `dev`. Read the changelog of major updates before merging. Production dependency updates are titled `fix(deps): ...`, so they release a patch version: consumers get the updated dependencies.
-- Dependabot **security** updates always target `main`, whatever the configuration says. Treat them like a [hotfix](branching.md#hotfixes): review, squash-merge into `main`, and the fix reaches `dev` afterwards.
+- Dependabot **security** updates always target `main`, whatever the configuration says. In a library, treat them like a [hotfix](branching.md#hotfixes): review, squash-merge into `main`, and the fix reaches `dev` afterwards. In an app with staging, move them to `dev` so staging sees them first ([deploying](deploying.md#security-updates-go-through-staging)).
 
 ## CI workflows
 

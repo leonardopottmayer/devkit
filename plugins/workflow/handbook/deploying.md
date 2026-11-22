@@ -76,6 +76,20 @@ The same compose file serves every environment of an app. Only the env file chan
 
 Staging needs nothing per release: `pull` and `up -d` whenever `dev` moved.
 
+## Security updates go through staging
+
+Dependabot opens **security** updates against `main` whatever its configuration says. For a library
+they are hotfixes ([security](security.md#dependencies)); for an app, `main` is production, so they
+take the normal road instead and reach staging first:
+
+```bash
+gh pr edit <number> --base dev       # move it to dev
+gh pr comment <number> --body "@dependabot rebase"   # Dependabot rebases it on dev; CI runs again
+gh pr merge <number> --squash --auto # once green
+```
+
+They ship with the next release. When the vulnerability is urgent, release `dev` right after.
+
 ## Private images
 
 GHCR images are private by default, even for a public repository. The server logs in once with a personal access token limited to `read:packages`:

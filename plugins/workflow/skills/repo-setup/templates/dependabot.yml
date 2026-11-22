@@ -1,5 +1,6 @@
 # Keep only the ecosystems the project uses. Remove every `target-branch: dev` line while the project has no dev branch (stage 1).
-# Security updates ignore target-branch: they always open against main and are handled like hotfixes.
+# Security updates ignore target-branch: they always open against main. A library handles them like hotfixes;
+# an app with staging moves them to dev (handbook/deploying.md).
 version: 2
 updates:
   - package-ecosystem: github-actions
