@@ -35,6 +35,7 @@ On every release, in one commit on `main` named `chore(release): <version>`:
   | .NET | `Directory.Build.props` at the root | `<Version>`, which every project inherits |
   | Node | `package.json` (every workspace package, in a monorepo) | `"version"` |
   | Claude Code plugin | `.claude-plugin/plugin.json` | `"version"` |
+  | Several stacks building one app | `VERSION` at the root, read by every build | the whole file |
 
   A repository with several stacks gets all of its files updated to the same number.
 - **`CHANGELOG.md`**, with the new section on top.

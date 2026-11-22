@@ -46,6 +46,7 @@ The project must be in stage 2: `dev` exists and both `main` and `dev` have rule
 | .NET | `<Version>` in `Directory.Build.props` at the root | it exists, and no other property hard-codes the number. `PackageVersion` defaults to `Version`; derived ones like `<AssemblyVersion>$(Version).0</AssemblyVersion>` are fine. Remove `<Version>` from the `.csproj` files. |
 | Node | `"version"` in `package.json` (every workspace package, in a monorepo) | all packages have the same number |
 | Claude Code plugin | `"version"` in each `.claude-plugin/plugin.json` | same number everywhere |
+| One `VERSION` file at the root | `VERSION`, read by each stack's build (MSBuild, image builds, the app) | nothing else hard-codes the number |
 
 ### 2. Adoption tag
 
@@ -71,6 +72,7 @@ On a branch from `dev` (`ci/release`):
    | Node, one package | `npm pkg set version=${nextRelease.version}` | `package.json` |
    | Node, workspaces | `find . -name package.json -not -path '*/node_modules/*' -execdir npm pkg set version=${nextRelease.version} \;` | `package.json` plus one glob per workspace folder (`packages/*/package.json`) |
    | Claude Code plugin | `for f in plugins/*/.claude-plugin/plugin.json; do jq --arg v ${nextRelease.version} '.version = $v' $f > $f.tmp && mv $f.tmp $f; done` | `plugins/*/.claude-plugin/plugin.json` |
+   | A root `VERSION` file read by every stack (lockstep app) | `echo ${nextRelease.version} > VERSION` | `VERSION` |
 
    The commands run on the Ubuntu runner, not on the user's machine. Inside the JSON string, escape backslashes and double quotes (`\;` becomes `\\;`, `"` becomes `\"`). `VERSION_FILES` is replaced by one array entry per file or glob.
 2. [`templates/release.yml`](templates/release.yml) → `.github/workflows/release.yml`. For stage 3 alone, **delete the `publish` job** (and the `workflow_dispatch` trigger with it).
