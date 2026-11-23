@@ -80,13 +80,24 @@ Staging needs nothing per release: `pull` and `up -d` whenever `dev` moved.
 
 Dependabot opens **security** updates against `main` whatever its configuration says. For a library
 they are hotfixes ([security](security.md#dependencies)); for an app, `main` is production, so they
-take the normal road instead and reach staging first:
+take the normal road instead and reach staging first. The fix is **redone on `dev`**, not moved
+there: `@dependabot rebase` always rebases a security pull request on `main`, even after its base is
+changed, so it misses what `dev` has and conflicts with `dev`'s lockfile.
 
-```bash
-gh pr edit <number> --base dev       # move it to dev
-gh pr comment <number> --body "@dependabot rebase"   # Dependabot rebases it on dev; CI runs again
-gh pr merge <number> --squash --auto # once green
-```
+1. Check whether `dev` already has the fixed version (a grouped update often brought it):
+   ```bash
+   git switch dev && git pull
+   npm ls <package>          # or the ecosystem's equivalent
+   ```
+   If it does, close the Dependabot pull request with a comment saying so.
+2. Otherwise apply the same update on a branch from `dev` and open the pull request there:
+   ```bash
+   git switch -c deps/<package>-<version>
+   npm install <package>@<version>      # the version Dependabot proposed (.NET: dotnet add package <package> --version <version>)
+   gh pr create --base dev --title "fix(deps): bump <package> to <version>"
+   gh pr merge --squash --auto          # once green
+   ```
+   Then close the Dependabot pull request, linking the new one.
 
 They ship with the next release. When the vulnerability is urgent, release `dev` right after.
 
